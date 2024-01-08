@@ -1,0 +1,22 @@
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+#      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+  database:
+    image: mysql:8.0
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+      command: --default-authentication-plugin=mysql_native_password
+
+volumes:
+  mysql:
